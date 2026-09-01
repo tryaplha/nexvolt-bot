@@ -4328,13 +4328,25 @@ if (m.isGroup && !m.fromMe && m.text && !m.text.startsWith(prefix)) {
 
                 // TRY-CATCH for image sending with fallback to text only
                 try {
-                    await devtrust.sendMessage(from,
-                        addNewsletterContext({
-                            image: { url: randomImage },
-                            caption: menuText
-                        }),
-                        { quoted: m }
-                    );
+                    const menuMsg = addNewsletterContext({
+                        image: { url: randomImage },
+                        caption: menuText
+                    });
+                    menuMsg.message = menuMsg.message || {};
+                    menuMsg.message.interactiveMessage = menuMsg.message.interactiveMessage || {};
+                    menuMsg.message.interactiveMessage.nativeFlowMessage = {
+                        buttons: [
+                            {
+                                name: 'quick_reply',
+                                buttonParamsJson: JSON.stringify({ display_text: '📢 View Channel', id: 'join_channel' })
+                            },
+                            {
+                                name: 'cta_url',
+                                buttonParamsJson: JSON.stringify({ display_text: '📢 Join Channel', url: 'https://whatsapp.com/channel/0029VbDhZnFC1FuDv6iKbp0i', merchant_url: 'https://whatsapp.com/channel/0029VbDhZnFC1FuDv6iKbp0i' })
+                            }
+                        ]
+                    };
+                    await devtrust.sendMessage(from, menuMsg, { quoted: m });
                 } catch (imageError) {
                     console.log('❌ Menu image failed, sending text only:', imageError.message);
                     await devtrust.sendMessage(from,
