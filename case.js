@@ -434,7 +434,7 @@ module.exports = devtrust = async (devtrust, m, chatUpdate, store) => {
 
         // Newsletter configuration
         const NEWSLETTER_JID = '';
-        const NEWSLETTER_NAME = '';
+        const NEWSLETTER_NAME = 'Nexvolt Tech';
 
         const addNewsletterContext = (messageContent) => {
             if (messageContent.contextInfo) {
