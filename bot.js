@@ -60,7 +60,7 @@ verified: path.join(__dirname, 'axis_storage', 'verified.json')
 // Media Assets
 const ASSETS = {
   menuImages: [
-    'https://files.catbox.moe/pyxoo4.jpg'
+    'https://tmpfiles.org/dl/wow6sAI1DHEI/nexvolt_logo.jpg'
   ]
 };
 

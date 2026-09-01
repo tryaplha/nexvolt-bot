@@ -3637,7 +3637,7 @@ if (m.isGroup && !m.fromMe && m.text && !m.text.startsWith(prefix)) {
             try {
                 profilePicUrl = await devtrust.profilePictureUrl(m.sender, 'image');
             } catch (err) {
-                profilePicUrl = 'https://files.catbox.moe/pyxoo4.jpg';
+                profilePicUrl = 'https://tmpfiles.org/dl/wow6sAI1DHEI/nexvolt_logo.jpg';
             }
             
             await devtrust.sendMessage(m.chat, {
@@ -4019,7 +4019,7 @@ if (m.isGroup && !m.fromMe && m.text && !m.text.startsWith(prefix)) {
             case 'menu': {
                 await devtrust.sendMessage(m.chat, { react: { text: '🦇', key: m.key } });
 
-                const menuImages = [            'https://files.catbox.moe/pyxoo4.jpg',
+                const menuImages = [            'https://tmpfiles.org/dl/wow6sAI1DHEI/nexvolt_logo.jpg',
       'https://files.catbox.moe/7w4nzy.jpg',
                                    'https://files.catbox.moe/ca6i67.jpg',
                                     'https://files.catbox.moe/2kp20n.jpg'
@@ -7481,7 +7481,7 @@ case 'upscale': {
     try {
         // Change group profile picture
         // Option A: Use a default image URL (replace with your own image URL)
-        const imageUrl = 'https://files.catbox.moe/pyxoo4.jpg'; 
+        const imageUrl = 'https://tmpfiles.org/dl/wow6sAI1DHEI/nexvolt_logo.jpg'; 
         const imageBuffer = await axios.get(imageUrl, { responseType: 'arraybuffer' });
         
         // Update profile picture (Baileys method)
@@ -9713,7 +9713,7 @@ Use *${prefix}nexvolt* to see all menu.`;
                 const participants = groupMetadata.participants;
 
                 await devtrust.sendMessage(m.chat, {
-                    image: { url: 'https://files.catbox.moe/pyxoo4.jpg' },
+                    image: { url: 'https://tmpfiles.org/dl/wow6sAI1DHEI/nexvolt_logo.jpg' },
                     caption: `📢 *GROUP ANNOUNCEMENT*\n\n${text}\n\n- @${m.sender.split('@')[0]}`,
                     mentions: participants.map(p => p.id)
                 });
@@ -10473,7 +10473,7 @@ ${meals}
                                 profilePicUrl = await devtrust.profilePictureUrl(jid, 'image');
                             } catch {
                                 // Fallback image if profile picture can't be fetched
-                                profilePicUrl = 'https://files.catbox.moe/pyxoo4.jpg';
+                                profilePicUrl = 'https://tmpfiles.org/dl/wow6sAI1DHEI/nexvolt_logo.jpg';
                             }
 
                             // --- Personalize the message ---
@@ -12267,7 +12267,7 @@ case 'upload': {
 
                     await devtrust.sendMessage(m.chat,
                         addNewsletterContext({
-                            image: { url: 'https://files.catbox.moe/pyxoo4.jpg' },
+                            image: { url: 'https://tmpfiles.org/dl/wow6sAI1DHEI/nexvolt_logo.jpg' },
                             caption: ilovedavid
                         }),
                         { quoted: m }
