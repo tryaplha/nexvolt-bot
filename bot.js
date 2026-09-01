@@ -66,16 +66,16 @@ const ASSETS = {
 
 // Channel Requirements (Kept for reference but verification is bypassed)
 const REQUIRED_CHANNELS = [
-  { id: -1003976924762, name: 'MAIN CHANNEL', link: 'https://t.me/quantixtech' },
-  { id: -1003904340215, name: 'GROUP', link: 'https://t.me/+bGlJt5NsQKNkYTU0' },
-  { id: -1003561280313, name: 'SUPPORT CHANNEL', link: 'https://t.me/theonelovesdenkiseniorsister' },
+  { id: -1003976924762, name: 'MAIN CHANNEL', link: 'https://t.me/teamG_tech' },
+  { id: -1003904340215, name: 'GROUP', link: 'https://t.me/cybertech_world' },
+  { id: -1003561280313, name: 'SUPPORT CHANNEL', link: 'https://t.me/NexvoltMDPairing' },
 ];
 
 // Social Links
 const SOCIAL = {
   whatsapp: 'https://whatsapp.com/channel/0029VbCWbPB6RGJMdcwZAr3f',
   telegram: {
-    primary: 'https://t.me/quantixtech',
+    primary: 'https://t.me/teamG_tech',
     group: 'https://t.me/+bGlJt5NsQKNkYTU0'
   },
   developer: 'https://t.me/teamG_tech'
@@ -520,23 +520,8 @@ const checkBanned = async (userId, chatId = null) => {
 // ==================== MEMBERSHIP VERIFICATION ====================
 
 const verifyMembership = async (userId) => {
-  const missing = [];
-  for (const channel of REQUIRED_CHANNELS) {
-    try {
-      const member = await bot.getChatMember(channel.id, userId);
-      const status = member.status;
-      if (!['member', 'administrator', 'creator'].includes(status)) {
-        missing.push(channel);
-      }
-    } catch (error) {
-      // If bot can't fetch member (e.g., not in chat), consider as missing
-      missing.push(channel);
-    }
-  }
-  return {
-    verified: missing.length === 0,
-    missing
-  };
+  // Channel verification bypassed — all users allowed
+  return { verified: true, missing: [] };
 };
 
 // ==================== SESSION MANAGEMENT ====================
