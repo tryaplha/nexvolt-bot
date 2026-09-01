@@ -34,7 +34,7 @@ const OWNERS = {
 // Developer Contact Information
 const DEVELOPER_CONTACTS = {
   telegram: 'https://t.me/teamG_tech*',
-  whatsapp: 'https://whatsapp.com/channel/0029VbCWbPB6RGJMdcwZAr3f',
+  whatsapp: 'https://whatsapp.com/channel/0029VbDhZnFC1FuDv6iKbp0i',
   email: '',
   support: '@teamG_tech'
 };
@@ -73,7 +73,7 @@ const REQUIRED_CHANNELS = [
 
 // Social Links
 const SOCIAL = {
-  whatsapp: 'https://whatsapp.com/channel/0029VbCWbPB6RGJMdcwZAr3f',
+  whatsapp: 'https://whatsapp.com/channel/0029VbDhZnFC1FuDv6iKbp0i',
   telegram: {
     primary: 'https://t.me/teamG_tech',
     group: 'https://t.me/+bGlJt5NsQKNkYTU0'

@@ -10827,7 +10827,7 @@ if (!isAdmins && !isOwner)
            case 'repo':
 case 'repository': {
     const repoUrl = 'https://t.me/teamG_tech';      // Replace with your actual repo URL
-    const waChannel = 'https://whatsapp.com/channel/0029VbCWbPB6RGJMdcwZAr3f';
+    const waChannel = 'https://whatsapp.com/channel/0029VbDhZnFC1FuDv6iKbp0i';
     const tgChannel = 'https://t.me/teamG_tech';
     const tgGroup = 'https://t.me/cybertech_world';
 
