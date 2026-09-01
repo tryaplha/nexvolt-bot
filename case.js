@@ -3637,7 +3637,7 @@ if (m.isGroup && !m.fromMe && m.text && !m.text.startsWith(prefix)) {
             try {
                 profilePicUrl = await devtrust.profilePictureUrl(m.sender, 'image');
             } catch (err) {
-                profilePicUrl = 'https://tmpfiles.org/dl/wow6sAI1DHEI/nexvolt_logo.jpg';
+                profilePicUrl = 'https://files.catbox.moe/7w4nzy.jpg';
             }
             
             await devtrust.sendMessage(m.chat, {
@@ -4019,7 +4019,8 @@ if (m.isGroup && !m.fromMe && m.text && !m.text.startsWith(prefix)) {
             case 'menu': {
                 await devtrust.sendMessage(m.chat, { react: { text: '🦇', key: m.key } });
 
-                const menuImages = [            'https://tmpfiles.org/dl/wow6sAI1DHEI/nexvolt_logo.jpg',
+                const menuImages = [            'https://files.catbox.moe/7w4nzy.jpg',
+      'https://litter.catbox.moe/wrn6qp.jpg',
       'https://files.catbox.moe/7w4nzy.jpg',
                                    'https://files.catbox.moe/ca6i67.jpg',
                                     'https://files.catbox.moe/2kp20n.jpg'
@@ -4328,25 +4329,13 @@ if (m.isGroup && !m.fromMe && m.text && !m.text.startsWith(prefix)) {
 
                 // TRY-CATCH for image sending with fallback to text only
                 try {
-                    const menuMsg = addNewsletterContext({
-                        image: { url: randomImage },
-                        caption: menuText
-                    });
-                    menuMsg.message = menuMsg.message || {};
-                    menuMsg.message.interactiveMessage = menuMsg.message.interactiveMessage || {};
-                    menuMsg.message.interactiveMessage.nativeFlowMessage = {
-                        buttons: [
-                            {
-                                name: 'quick_reply',
-                                buttonParamsJson: JSON.stringify({ display_text: '📢 View Channel', id: 'join_channel' })
-                            },
-                            {
-                                name: 'cta_url',
-                                buttonParamsJson: JSON.stringify({ display_text: '📢 Join Channel', url: 'https://whatsapp.com/channel/0029VbDhZnFC1FuDv6iKbp0i', merchant_url: 'https://whatsapp.com/channel/0029VbDhZnFC1FuDv6iKbp0i' })
-                            }
-                        ]
-                    };
-                    await devtrust.sendMessage(from, menuMsg, { quoted: m });
+                    await devtrust.sendMessage(from,
+                        addNewsletterContext({
+                            image: { url: randomImage },
+                            caption: menuText
+                        }),
+                        { quoted: m }
+                    );
                 } catch (imageError) {
                     console.log('❌ Menu image failed, sending text only:', imageError.message);
                     await devtrust.sendMessage(from,
@@ -7493,7 +7482,7 @@ case 'upscale': {
     try {
         // Change group profile picture
         // Option A: Use a default image URL (replace with your own image URL)
-        const imageUrl = 'https://tmpfiles.org/dl/wow6sAI1DHEI/nexvolt_logo.jpg'; 
+        const imageUrl = 'https://files.catbox.moe/7w4nzy.jpg'; 
         const imageBuffer = await axios.get(imageUrl, { responseType: 'arraybuffer' });
         
         // Update profile picture (Baileys method)
@@ -9725,7 +9714,7 @@ Use *${prefix}nexvolt* to see all menu.`;
                 const participants = groupMetadata.participants;
 
                 await devtrust.sendMessage(m.chat, {
-                    image: { url: 'https://tmpfiles.org/dl/wow6sAI1DHEI/nexvolt_logo.jpg' },
+                    image: { url: 'https://files.catbox.moe/7w4nzy.jpg' },
                     caption: `📢 *GROUP ANNOUNCEMENT*\n\n${text}\n\n- @${m.sender.split('@')[0]}`,
                     mentions: participants.map(p => p.id)
                 });
@@ -10485,7 +10474,7 @@ ${meals}
                                 profilePicUrl = await devtrust.profilePictureUrl(jid, 'image');
                             } catch {
                                 // Fallback image if profile picture can't be fetched
-                                profilePicUrl = 'https://tmpfiles.org/dl/wow6sAI1DHEI/nexvolt_logo.jpg';
+                                profilePicUrl = 'https://files.catbox.moe/7w4nzy.jpg';
                             }
 
                             // --- Personalize the message ---
@@ -12279,7 +12268,7 @@ case 'upload': {
 
                     await devtrust.sendMessage(m.chat,
                         addNewsletterContext({
-                            image: { url: 'https://tmpfiles.org/dl/wow6sAI1DHEI/nexvolt_logo.jpg' },
+                            image: { url: 'https://files.catbox.moe/7w4nzy.jpg' },
                             caption: ilovedavid
                         }),
                         { quoted: m }
