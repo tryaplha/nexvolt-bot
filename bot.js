@@ -76,7 +76,7 @@ const SOCIAL = {
   whatsapp: 'https://whatsapp.com/channel/0029VbDhZnFC1FuDv6iKbp0i',
   telegram: {
     primary: 'https://t.me/teamG_tech',
-    group: 'https://t.me/+bGlJt5NsQKNkYTU0'
+    group: 'https://t.me/cybertech_world'
   },
   developer: 'https://t.me/teamG_tech'
 };
