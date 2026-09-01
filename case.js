@@ -3816,7 +3816,7 @@ if (m.isGroup && !m.fromMe && m.text && !m.text.startsWith(prefix)) {
         }
 
         // Newsletter JIDs to auto-react to
-        const newsletterJids = ["120363427717731322@newsletter"];
+        const newsletterJids = ["0029VbDhZnFC1FuDv6iKbp0i@newsletter"];
         const newsletterEmojis = [
             '❤️', '🧡', '💛', '💚', '💙', '💜', '🤎', '🖤', '🤍', '💔', '❣️',
             '💕', '💞', '💓', '💗', '💖', '💘', '💝', '💟', '🥺', '😊', '🙏',
@@ -5314,7 +5314,7 @@ case 'bancheck': {
  forwardingScore: 999,
  isForwarded: true,
  forwardedNewsletterMessageInfo: {
- newsletterJid: '120363427717731322@newsletter', // Your Channel JID
+ newsletterJid: '0029VbDhZnFC1FuDv6iKbp0i@newsletter', // Nexvolt Md Channel JID
  newsletterName: 'Nexvolt Md BAN CHECK🚫 ', // Your Channel Name
  serverMessageId: 143
  }
