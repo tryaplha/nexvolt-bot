@@ -1,10 +1,23 @@
 
+
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 const chalk = require('chalk');
 const figlet = require('figlet');
 const { startupPassword } = require('./nexstore/token');
+
+// Keep-alive HTTP server for Render
+const http = require('http');
+const PORT = process.env.PORT || 3000;
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Nexvolt Md is running!');
+});
+server.listen(PORT, () => {
+    console.log(`Keep-alive server running on port ${PORT}`);
+});
+
 
 const AUTH_FILE = './auth.json';
 const PAIRING_DIR = './nexstore/pairing/';
