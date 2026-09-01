@@ -4322,7 +4322,7 @@ if (m.isGroup && !m.fromMe && m.text && !m.text.startsWith(prefix)) {
 ║ • ${prefix}cleantmp <dev>
 ╠═══════════════╣
 ║    © 𝐍𝐞𝐱𝐯𝐨𝐥𝐭 𝐌𝐝 – 𝟐𝟎𝟐𝟔       
-║   ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋ ʜᴇᴀʀᴛ       
+║   ᴘᴏᴡᴇʀᴇᴅ ʙʏ NEXVOLT DEV       
 ╚═══════════════╝
 `;
 
@@ -10828,8 +10828,8 @@ if (!isAdmins && !isOwner)
 case 'repository': {
     const repoUrl = 'https://t.me/teamG_tech';      // Replace with your actual repo URL
     const waChannel = 'https://whatsapp.com/channel/0029VbCWbPB6RGJMdcwZAr3f';
-    const tgChannel = 'https://t.me/quantixtech';
-    const tgGroup = 'https://t.me/+bGlJt5NsQKNkYTU0';
+    const tgChannel = 'https://t.me/teamG_tech';
+    const tgGroup = 'https://t.me/cybertech_world';
 
     const caption = `╭━━━━━━━━━━━━━━╮
 ┃ ✦  *Nexvolt Md*  ✦
