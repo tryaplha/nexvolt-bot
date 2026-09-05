@@ -96,10 +96,29 @@ const initializeBot = async () => {
 
     await autoLoadPairs();
 
-    if (isAuthenticated()) {
-        console.log(chalk.green('✅ Welcome back! Skipping password...'));
+    // Railway/non-interactive deployments cannot answer a terminal prompt.
+    // Set AUTO_START=true (recommended for Railway) to start automatically.
+    const isRailway = Boolean(
+        process.env.RAILWAY_ENVIRONMENT_NAME ||
+        process.env.RAILWAY_PROJECT_ID ||
+        process.env.RAILWAY_SERVICE_ID
+    );
+    const autoStart = process.env.AUTO_START === 'true' || isRailway;
+
+    if (isAuthenticated() || autoStart) {
+        if (autoStart && !isAuthenticated()) {
+            setAuthenticated(true);
+            console.log(chalk.green('✅ Non-interactive deployment detected. Auto-start enabled.'));
+        } else {
+            console.log(chalk.green('✅ Welcome back! Skipping password...'));
+        }
         launchBot();
     } else {
+        if (!startupPassword) {
+            console.log(chalk.red('❌ STARTUP_PASSWORD is not configured.'));
+            process.exit(1);
+        }
+
         const rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout
@@ -120,7 +139,7 @@ const initializeBot = async () => {
             launchBot();
         });
 
-        rl._writeToOutput = function _writeToOutput(stringToWrite) {
+        rl._writeToOutput = function(stringToWrite) {
             if (rl.stdoutMuted) {
                 rl.output.write(chalk.cyan('*'));
             } else {
