@@ -12694,7 +12694,7 @@ case 'tgsticker': {
  }
  const packName = match[1];
  // --- 2. Define your Telegram Bot Token (Replace with your actual token)---
- const TELEGRAM_BOT_TOKEN = '8724877859:AAEh2jeOiVBfMHZjQFNL0JbSnZfIoWEHIx4'; // <<< YOUR TOKEN HERE
+ const TELEGRAM_BOT_TOKEN = process.env.BOT_TOKEN || '';
  // --- 3. Fetch the sticker set from Telegram ---
  const apiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getStickerSet?name=${packName}`;
  try {

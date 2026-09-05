@@ -65,11 +65,12 @@ const ASSETS = {
   ]
 };
 
-// Channel Requirements (Kept for reference but verification is bypassed)
+// Access Requirements — users must join all 4 communities before using the bot.
 const REQUIRED_CHANNELS = [
-  { id: -1003976924762, name: 'MAIN CHANNEL', link: 'https://t.me/teamG_tech' },
-  { id: -1003904340215, name: 'GROUP', link: 'https://t.me/cybertech_world' },
-  { id: -1003561280313, name: 'SUPPORT CHANNEL', link: 'https://t.me/NexvoltMDPairing' },
+  { username: '@teamG_tech', name: 'TEAMG TECH', link: 'https://t.me/teamG_tech' },
+  { username: '@NexvoltMDUpdates', name: 'NEXVOLT UPDATES', link: 'https://t.me/NexvoltMDUpdates' },
+  { username: '@cybertech_world', name: 'CYBERTECH WORLD', link: 'https://t.me/cybertech_world' },
+  { username: '@NexvoltMDPairing', name: 'NEXVOLT PAIRING', link: 'https://t.me/NexvoltMDPairing' },
 ];
 
 // Social Links
@@ -521,8 +522,20 @@ const checkBanned = async (userId, chatId = null) => {
 // ==================== MEMBERSHIP VERIFICATION ====================
 
 const verifyMembership = async (userId) => {
-  // Channel verification bypassed — all users allowed
-  return { verified: true, missing: [] };
+  const missing = [];
+  for (const community of REQUIRED_CHANNELS) {
+    try {
+      const member = await bot.getChatMember(community.username, userId);
+      const ok = ['creator', 'administrator', 'member'].includes(member.status) ||
+        (member.status === 'restricted' && member.is_member === true);
+      if (!ok) missing.push(community);
+    } catch (error) {
+      // If the bot cannot inspect a community, treat it as missing rather than bypassing access.
+      console.error(`Membership check failed for ${community.username}:`, error.message);
+      missing.push(community);
+    }
+  }
+  return { verified: missing.length === 0, missing };
 };
 
 // ==================== SESSION MANAGEMENT ====================
@@ -648,12 +661,12 @@ const sendMembershipRequired = async (chatId, verification, userName) => {
     inlineButtons.push([{ text: `📢 Join ${channel.name}`, url: channel.link }]);
   }
   
-  inlineButtons.push([{ text: '✅ Approve Access', callback_data: 'verify_membership' }]);
+  inlineButtons.push([{ text: '✅ Verify Access', callback_data: 'verify_membership' }]);
   
   await bot.sendMessage(chatId,
     `┌ ❏ ◇ *⌜VERIFICATION REQUIRED⌟* ◇
 ├◇ Hello ${userName}!
-├◇ You must join the following channels to use the bot:
+├◇ Join all 4 Telegram communities to access the bot:
 ├◇
 ${missingChannelsText}├◇
 ├◇ After joining, click 'Approve' below
@@ -688,6 +701,7 @@ const sendMainMenu = async (chatId, userId, userName, isAdminUser = false, isOwn
 │
 ├◆ ᴜᴘᴛɪᴍᴇ: ${uptime}
 ├◆ ᴜsᴇʀs: ${formatNumber(database.stats.totalUsers)}
+├◆ ᴘᴀɪʀᴇᴅ ɴᴜᴍʙᴇʀs: ${formatNumber(sessions.length)}
 ├◆ sᴇssɪᴏɴs: ${sessions.length}/${SYSTEM.sessionLimit}
 ├◆ ᴛᴏᴅᴀʏ: ${formatNumber(database.stats.dailyConnections)}
 │`;
@@ -748,7 +762,10 @@ const sendMainMenu = async (chatId, userId, userName, isAdminUser = false, isOwn
   const keyboard = {
     inline_keyboard: [
       [
-        { text: '📢 ᴄʜᴀɴɴᴇʟ', url: SOCIAL.telegram.primary },
+        { text: '📢 ᴠɪᴇᴡ ᴡʜᴀᴛsᴀᴘᴘ ᴄʜᴀɴɴᴇʟ', url: SOCIAL.whatsapp }
+      ],
+      [
+        { text: '📢 ᴛᴇʟᴇɢʀᴀᴍ', url: SOCIAL.telegram.primary },
         { text: '👥 ɢʀᴏᴜᴘ', url: SOCIAL.telegram.group }
       ]
     ]
@@ -791,24 +808,12 @@ bot.onText(/\/start(?:\s+(.+))?/, async (msg, match) => {
     return handleGroupMessage(msg);
   }
 
-  //  Channel membership check
-  // Check verification
-if (!isAdmin(userId.toString()) && !isOwner(userId) && !database.verifiedUsers.has(userId.toString())) {
-  const verification = await verifyMembership(userId);
-  if (!verification.verified) {
-    return sendMembershipRequired(chatId, verification, userName);
-  }
-  // User is already in all channels, add to verified set
-  database.verifiedUsers.add(userId.toString());
-  await saveData();
-}
-
-
-  if (!isAdmin(userId.toString()) && !isOwner(userId)) {
+  // Access gate: join all 4 required Telegram communities before continuing.
+  if (!isAdmin(userId.toString()) && !isOwner(userId) && !database.verifiedUsers.has(userId.toString())) {
     const verification = await verifyMembership(userId);
-    if (!verification.verified) {
-      return sendMembershipRequired(chatId, verification, userName);
-    }
+    if (!verification.verified) return sendMembershipRequired(chatId, verification, userName);
+    database.verifiedUsers.add(userId.toString());
+    await saveData();
   }
 
   await sendMainMenu(chatId, userId, userName, isAdmin(userId.toString()), isOwner(userId));
@@ -831,6 +836,13 @@ bot.onText(/\/menu(?:\s+(.+))?/, async (msg, match) => {
 
   if (isGroup) {
     return handleGroupMessage(msg);
+  }
+
+  if (!isAdmin(userId.toString()) && !isOwner(userId) && !database.verifiedUsers.has(userId.toString())) {
+    const verification = await verifyMembership(userId);
+    if (!verification.verified) return sendMembershipRequired(chatId, verification, userName);
+    database.verifiedUsers.add(userId.toString());
+    await saveData();
   }
 
   await sendMainMenu(chatId, userId, userName, isAdmin(userId.toString()), isOwner(userId));
@@ -867,19 +879,13 @@ bot.onText(/\/pair(?:\s+(.+))?/, async (msg, match) => {
     return handleGroupMessage(msg);
   }
 
-  // Channel membership check for non-admin users
-  
-
-  if (!isAdmin(userId.toString()) && !isOwner(userId) && !hasAccess(userId)) {
-  if (!database.verifiedUsers.has(userId.toString())) {
+  // Access gate for pairing.
+  if (!isAdmin(userId.toString()) && !isOwner(userId) && !database.verifiedUsers.has(userId.toString())) {
     const verification = await verifyMembership(userId);
-    if (!verification.verified) {
-      return sendMembershipRequired(chatId, verification, msg.from.first_name);
-    }
+    if (!verification.verified) return sendMembershipRequired(chatId, verification, msg.from.first_name);
     database.verifiedUsers.add(userId.toString());
     await saveData();
   }
-}
 
   if (!input) {
     return bot.sendMessage(chatId,
@@ -2540,6 +2546,19 @@ bot.on('callback_query', async (query) => {
   }
 }
 
+  else if (data === 'show_report') {
+    await bot.answerCallbackQuery(query.id);
+    await bot.sendMessage(chatId,
+      `┌ ❏ ◆ *⌜𝗥𝗘𝗣𝗢𝗥𝗧 𝗛𝗘𝗟𝗣⌟* ◆
+│
+├◆ Please use /report followed by your issue.
+├◆ Example: /report pairing code failed
+│
+└ ❏`,
+      { parse_mode: 'Markdown' }
+    );
+  }
+
   else if (data === 'show_main') {
     await bot.answerCallbackQuery(query.id);
     await sendMainMenu(chatId, userId, userName, isAdmin(userId.toString()), isOwner(userId));
@@ -2569,6 +2588,7 @@ bot.on('callback_query', async (query) => {
     await bot.answerCallbackQuery(query.id, { text: 'sᴇɴᴅɪɴɢ ᴠɪᴅᴇᴏ...' });
     
     try {
+      if (!ASSETS.tutorialVideo) throw new Error('Tutorial video is not configured');
       await bot.sendVideo(chatId, ASSETS.tutorialVideo, {
         caption: `🎬 *${SYSTEM.name} sᴇᴛᴜᴘ ɢᴜɪᴅᴇ*`,
         parse_mode: 'Markdown'
