@@ -14,7 +14,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs').promises;
 const path = require('path');
 const chalk = require('chalk');
-const { BOT_TOKEN } = require('../session/token');
+const { BOT_TOKEN } = require('../nexstore/token');
 const { autoLoadPairs } = require('./autoload');
 
 // IMPORTANT: pair.js exports startpairing directly (module.exports = startpairing)
