@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const BOT_TOKEN = (process.env.BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN || '').trim();
+const BOT_TOKEN = '1234567890:AAFrxf2NYopcZuTdsMDkSNtGw2dVN_uGiio';
 const startupPassword = process.env.STARTUP_PASSWORD || 'nexvolt';
 
 if (!BOT_TOKEN) {
