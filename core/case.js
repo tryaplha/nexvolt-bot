@@ -1019,70 +1019,127 @@ ${rows.map(r => `│ ➤ ${r}`).join('\n')}
 ╰────────────────`;
 
     const menuText =
-`╭━━━━━━━━━━━━━━━╮
-   ✦ ℤ𝕌𝕂𝕆 ✗ 𝕄𝔻 ✦
-   ── 𝗠𝗔𝗜𝗡 𝗠𝗘𝗡𝗨 ──
-╰━━━━━━━━━━━━━━━╯
+`╭────────────────────╮
+│ ⚡ *𝐍𝐄𝐗𝐕𝐎𝐋𝐓 𝐌𝐃*
+│ ✦ _Powerful • Fast • Complete_
+├────────────────────┤
+│ 👤 ${userName}
+│ 📦 50+ Commands • 🔤 ${prefix} Prefix
+│ ⚙️ ${db.botMode?.mode || 'PUBLIC'} 🌐 • ⏱️ ${upStr}
+│ 📅 ${date} • 🕐 ${now} WAT
+│ 🤖 AI • 📥 Downloads • 🛡️ Security
+╰────────────────────╯
 
-👤 ${userName}   🕒 ${now} WAT
-📅 ${date}   ⏱ ${upStr}
-🧠 ${mem}MB   🔧 ${db.botMode?.mode || 'public'}
+┌─ *CORE • 6* ─┐
+│ ${prefix}ping
+│ ${prefix}menu
+│ ${prefix}sticker
+│ ${prefix}help
+│ ${prefix}runtime
+│ ${prefix}botinfo
+└───────────────┘
 
-${sec('CORE', [
-  `${prefix}ping`, `${prefix}menu`, `${prefix}sticker`,
-  `${prefix}ai <q>`, `${prefix}deepseek <q>`, `${prefix}ds <q>`,
-  `${prefix}gpt <q>`, `${prefix}claude <q>`, `${prefix}kimi <q>`, `${prefix}geminipro <q>`,
-  `${prefix}play <song>`, `${prefix}imagine <prompt>`, `${prefix}img <prompt>`,
-  `${prefix}flux <prompt>`, `${prefix}tts <text>`, `${prefix}translate`,
-  `${prefix}tiktok <url>`, `${prefix}toimage`, `${prefix}getpp @user`,
-  `${prefix}apkdl <app>`, `${prefix}apk <app>`, `${prefix}setpp`,
-  `${prefix}toaudio`, `${prefix}togif`, `${prefix}toptt`
-])}
+╭─ *AI & TEXT • 11* ─╮
+│ ${prefix}ai <query>
+│ ${prefix}gpt <query>
+│ ${prefix}claude <query>
+│ ${prefix}deepseek <query>
+│ ${prefix}kimi <query>
+│ ${prefix}geminipro <query>
+│ ${prefix}imagine <prompt>
+│ ${prefix}flux <prompt>
+│ ${prefix}translate <text>
+│ ${prefix}grammar <text>
+│ ${prefix}summarize <text>
+╰────────────────╯
 
-${sec('TOOLS', [
-  `${prefix}qr <text>`, `${prefix}weather <city>`,
-  `${prefix}quote`, `${prefix}joke`, `${prefix}short <url>`,
-  `${prefix}summarize <text>`, `${prefix}code <request>`,
-  `${prefix}grammar <text>`, `${prefix}roast @user`, `${prefix}compliment @user`,
-  `${prefix}models`, `${prefix}model <id> <question>`
-])}
+┏━ *DOWNLOADERS • 5* ━┓
+│ ${prefix}tiktok <url>
+│ ${prefix}fb <url>
+│ ${prefix}ig <url>
+│ ${prefix}play <song>
+│ ${prefix}ytmp3 <url>
+┗━────────────━┛
 
-${sec('FOOTBALL', [
-  `${prefix}football`, `${prefix}football live`,
-  `${prefix}football today`, `${prefix}football search <team>`,
-  `${prefix}football stats`
-])}
+┌· *MEDIA & TOOLS • 12* ·┐
+│ ${prefix}toimage
+│ ${prefix}toaudio
+│ ${prefix}togif
+│ ${prefix}tts <text>
+│ ${prefix}qr <text>
+│ ${prefix}short <url>
+│ ${prefix}weather <city>
+│ ${prefix}code <request>
+│ ${prefix}quote
+│ ${prefix}joke
+│ ${prefix}setpp
+│ ${prefix}getpp @user
+└·────────────·┘
 
-${sec('PROTECTION', [
-  `${prefix}antilink`, `${prefix}antisticker`, `${prefix}antitag`,
-  `${prefix}antiviewonce`, `${prefix}anticall`, `${prefix}antidelete`,
-  `${prefix}antibot`
-])}
+╓─ *GROUP MANAGEMENT • 12* ─╖
+│ ${prefix}tagall <message>
+│ ${prefix}groupinfo
+│ ${prefix}promote @user
+│ ${prefix}demote @user
+│ ${prefix}kick @user
+│ ${prefix}jail @user
+│ ${prefix}unjail @user
+│ ${prefix}welcome
+│ ${prefix}goodbye
+│ ${prefix}setgcname <name>
+│ ${prefix}resetlink
+│ ${prefix}grouplink
+╙────────────────╜
 
-${sec('GROUP', [
-  `${prefix}tagall <msg>`, `${prefix}groupinfo`, `${prefix}promote @user`,
-  `${prefix}demote @user`, `${prefix}kick @user`, `${prefix}jail @user`,
-  `${prefix}unjail @user`, `${prefix}welcome`, `${prefix}goodbye`,
-  `${prefix}setgcname <name>`, `${prefix}gcdescription <desc>`,
-  `${prefix}resetlink`, `${prefix}setmenuimage`, `${prefix}setbotname <name>`
-])}
+┌✦ *PROTECTION • 5* ✦┐
+│ ${prefix}antilink
+│ ${prefix}antisticker
+│ ${prefix}anticall
+│ ${prefix}antidelete
+│ ${prefix}antibot
+└✦──────────✦┘
 
-${sec('MISC', [
-  `${prefix}mode / add / remove @user`, `${prefix}balance`, `${prefix}owner`,
-  `${prefix}viewonce`, `${prefix}autoreact`, `${prefix}idch <link>`,
-  `${prefix}savestatus`, `${prefix}fb <url>`, `${prefix}ig <url>`,
-  `${prefix}tw <url>`, `${prefix}snap <url>`, `${prefix}gif <category>`
-])}
+┌─ *FOOTBALL • 5* ─┐
+│ ${prefix}football
+│ ${prefix}football live
+│ ${prefix}football today
+│ ${prefix}football search <team>
+│ ${prefix}football stats
+└──────────────┘
 
-${sec('FUN', [
-  `${prefix}hug/kiss/slap/punch/cuddle/pat/poke/wave/wink/bonk/love/angry @user`,
-  `${prefix}blush/cry/happy/dance/smile/laugh/yeet/think/cool/celebrate`
-])}
+╭─ *REACTIONS • 15* ─╮
+│ ${prefix}hug @user
+│ ${prefix}kiss @user
+│ ${prefix}slap @user
+│ ${prefix}punch @user
+│ ${prefix}cuddle @user
+│ ${prefix}pat @user
+│ ${prefix}poke @user
+│ ${prefix}wave
+│ ${prefix}wink
+│ ${prefix}bonk @user
+│ ${prefix}blush
+│ ${prefix}cry
+│ ${prefix}happy
+│ ${prefix}dance
+│ ${prefix}laugh
+╰────────────────╯
 
-╭━━━━━━━━━━━━━━━╮
-  💎 NEXVOLT MD · 🥷 𝗡𝗘𝗫𝗩𝗢𝗟𝗧 𝗗𝗘𝗩
-╰━━━━━━━━━━━━━━━╯
+┏━ *OWNER ONLY • 6* ━┓
+│ ${prefix}setprefix <prefix>
+│ ${prefix}setbotname <name>
+│ ${prefix}setmenuimage <url>
+│ ${prefix}mode <public/private>
+│ ${prefix}ban <number>
+│ ${prefix}unban <number>
+┗━────────────━┛
+
+╭────────────────────╮
+│ 💎 NEXVOLT MD • 🥷 NEXVOLT DEV
+│ _Premium • Reliable • Always Online_
+╰────────────────────╯
 📰 Forwarded via ${global.newsletterName || 'NEXVOLT MD'}`;
+
 
     try {
         // Load image from media/logo.jpg
